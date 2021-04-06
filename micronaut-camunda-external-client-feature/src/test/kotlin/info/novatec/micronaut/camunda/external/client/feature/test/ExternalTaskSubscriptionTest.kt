@@ -16,9 +16,9 @@
 package info.novatec.micronaut.camunda.external.client.feature.test
 
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
+import org.assertj.core.api.Assertions.assertThat
 import org.camunda.bpm.client.ExternalTaskClient
 import org.camunda.bpm.client.impl.ExternalTaskClientImpl
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import javax.inject.Inject
 
@@ -36,11 +36,10 @@ class ExternalTaskSubscriptionTest {
         val client = externalTaskClient as ExternalTaskClientImpl
         val subscriptions = client.topicSubscriptionManager.subscriptions
 
-        assertEquals(1, subscriptions.size)
-
-        assertEquals("test-topic", subscriptions[0].topicName)
-        assertEquals(19000, subscriptions[0].lockDuration)
-        assertEquals(listOf("test-one", "test-two"), subscriptions[0].variableNames)
-        assertEquals(true, subscriptions[0].isLocalVariables)
+        assertThat(subscriptions.size).isEqualTo(1)
+        assertThat(subscriptions[0].topicName).isEqualTo("test-topic")
+        assertThat(subscriptions[0].lockDuration).isEqualTo(19000)
+        assertThat(subscriptions[0].variableNames).containsExactly("test-one", "test-two")
+        assertThat(subscriptions[0].isLocalVariables).isTrue
     }
 }

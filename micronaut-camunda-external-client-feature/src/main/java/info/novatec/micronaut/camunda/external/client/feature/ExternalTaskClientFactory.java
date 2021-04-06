@@ -60,7 +60,7 @@ public class ExternalTaskClientFactory {
 
         ExternalTaskClient client = clientBuilder.build();
 
-        final String baseUrl = ((ExternalTaskClientImpl) client).getTopicSubscriptionManager().getEngineClient().getBaseUrl();
+        String baseUrl = ((ExternalTaskClientImpl) client).getTopicSubscriptionManager().getEngineClient().getBaseUrl();
         log.info("ExternalTaskClient connected to {} and ready to process tasks", baseUrl);
 
         return client;

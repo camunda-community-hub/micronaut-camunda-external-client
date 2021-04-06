@@ -16,9 +16,9 @@
 package info.novatec.micronaut.camunda.external.client.feature.test
 
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
+import org.assertj.core.api.Assertions.assertThat
 import org.camunda.bpm.client.ExternalTaskClient
 import org.camunda.bpm.client.impl.ExternalTaskClientImpl
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import javax.inject.Inject
 
@@ -33,12 +33,12 @@ class ExternalTaskClientTest {
 
     @Test
     fun `test basic client configuration` () {
-        assertEquals(true, externalTaskClient.isActive)
+        assertThat(externalTaskClient.isActive).isTrue
 
         val client = externalTaskClient as ExternalTaskClientImpl
 
-        assertEquals("http://localhost:8080/engine-rest", client.topicSubscriptionManager.engineClient.baseUrl)
-        assertEquals("test-worker", client.topicSubscriptionManager.engineClient.workerId)
+        assertThat(client.topicSubscriptionManager.engineClient.baseUrl).isEqualTo("http://localhost:8080/engine-rest")
+        assertThat(client.topicSubscriptionManager.engineClient.workerId).isEqualTo("test-worker")
     }
 
     @Test
@@ -46,6 +46,6 @@ class ExternalTaskClientTest {
 
         val client = externalTaskClient as ExternalTaskClientImpl
 
-        assertEquals(false, client.topicSubscriptionManager.engineClient.isUsePriority)
+        assertThat(client.topicSubscriptionManager.engineClient.isUsePriority).isFalse
     }
 }

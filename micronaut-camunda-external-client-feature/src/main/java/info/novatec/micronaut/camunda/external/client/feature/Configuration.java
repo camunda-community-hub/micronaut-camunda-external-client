@@ -28,7 +28,7 @@ import java.util.Optional;
 public interface Configuration {
 
     /**
-     * Base url of the Camunda BPM Platform REST API. This information is mandatory.
+     * Base url of the Camunda Platform REST API. This information is mandatory.
      *
      * @return the base url
      */
@@ -36,7 +36,7 @@ public interface Configuration {
 
     /**
      * A custom worker id the Workflow Engine is aware of. This information is optional. Note: make sure to choose a
-     * unique worker id If not given or null, a worker id is generated automatically which consists of the hostname as
+     * unique worker id. If not given or null, a worker id is generated automatically which consists of the hostname as
      * well as a random and unique 128 bit string (UUID).
      *
      * @return the worker id - the Workflow Engine is aware of
