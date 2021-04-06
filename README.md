@@ -14,7 +14,7 @@ _We're not aware of all installations of our Open Source project. However, we lo
 * _discussing possible use cases with you,_
 * _aligning the roadmap to your needs!_
 
-_📨  Please [contact](#contact) us!_
+📨 _Please [contact](#contact) us!_
 
 ---
 
@@ -31,18 +31,20 @@ Micronaut + Camunda = :heart:
 
 # Table of Contents
 
-* [✨ Features](#features)
-* [🚀 Getting Started](#getting-started)
+* ✨ [Features](#features)
+* 🚀 [Getting Started](#getting-started)
   * [Supported JDKs](#supported-jdks)
   * [Dependency Management](#dependency-management)
   * [Configuration](#configuration)
-* [🏆 Advanced Topics](#advanced-topics)
-* [📚 Releases](#releases)
-* [📨 Contact](#contact)
+* 🏆 [Advanced Topics](#advanced-topics)
+  * [Customize the External Task Client](#customize-the-external-task-client)
+* 📚 [Releases](#releases)
+* 📨 [Contact](#contact)
 
 # ✨Features
 * Camunda external client can be integrated by simply adding a dependency to your project.
-* You can register multiple subscriptions on one client.
+* A worker can subscribe to multiple topics.
+* The worker's external task client can be configured with [properties](#configuration) and [programmatically](#customize-the-external-task-client).
 
 # 🚀Getting Started
 
@@ -65,7 +67,7 @@ The Camunda integration works with both Gradle and Maven, but we recommend using
 <details>
 <summary>Click to show Gradle configuration</summary>
 
-1. Optional: Create an empty Micronaut project using [Micronaut Launch](https://launch.micronaut.io) or alternatively with the CLI: `mn create-app my-example`.
+1. Optional: Create an empty Micronaut project using [Micronaut Launch](https://micronaut.io/launch) or alternatively with the CLI: `mn create-app my-example`.
 2. Add the dependency to the build.gradle:
 ```groovy
 implementation("info.novatec:micronaut-camunda-external-client-feature:0.1.0")
@@ -75,7 +77,7 @@ implementation("info.novatec:micronaut-camunda-external-client-feature:0.1.0")
 <details>
 <summary>Click to show Maven configuration</summary>
 
-1. Optional: Create an empty Micronaut using [Micronaut Launch](https://launch.micronaut.io) or alternatively with the CLI:  `mn create-app my-example --build=maven`.
+1. Optional: Create an empty Micronaut using [Micronaut Launch](https://micronaut.io/launch) or alternatively with the CLI:  `mn create-app my-example --build=maven`.
 2. Add the dependency to the pom.xml:
 ```xml
 <dependency>
@@ -89,15 +91,15 @@ implementation("info.novatec:micronaut-camunda-external-client-feature:0.1.0")
 Note: The module `micronaut-camunda-external-client-feature` includes the dependency `org.camunda.bpm:camunda-external-task-client` which will be resolved transitively.
 
 ## Creating a client
-The minimal configuration requires you to provide a handler for a specific topic, and a configuration that points to the
-camunda rest api. You can register multiple handlers in this way for different topics. To register a handler you just 
-need to add @ExternalTaskSubscription and specify the topic to listen to. On start of the application the external task 
-client will automatically connect to the specified camunda rest api and start fetching tasks.
+The minimal configuration requires you to provide a handler for a specific topic and a configuration that points to the
+Camunda REST API. You can register multiple handlers in this way for different topics. To register a handler you just 
+need to add the annotation `ExternalTaskSubscription` and specify the topic to listen to. On start of the application the external task 
+client will automatically connect to the specified Camunda REST API and start fetching tasks.
 
 Example configuration in application.yml
 ```yaml
 camunda.external-client:
-  base-url: the url of your camunda rest api
+  base-url: the URL of your Camunda REST API
 ```
 Example handler:
 ```java 
@@ -114,7 +116,9 @@ public class ExampleHandler implements ExternalTaskHandler {
 
     @Override
     public void execute(ExternalTask externalTask, ExternalTaskService externalTaskService) {
-        // Put your business logic here    
+        // Put your business logic here
+        
+        externalTaskService.complete(externalTask);
     }
 }
 ```
@@ -144,7 +148,7 @@ You may use the following properties (typically in application.yml) to configure
 
 | Prefix                | Property         | Default               | Description                                       |
 |-----------------------|------------------|-----------------------|---------------------------------------------------|
-| camunda.external-client | .base-url      |                       | Mandatory, Base url of the Camunda BPM Platform REST API. |
+| camunda.external-client | .base-url      |                       | Mandatory, Base url of the Camunda Platform REST API. |
 |                       | .worker-id       | Generated out of hostname + 128 Bit UUID | A custom worker id the Workflow Engine is aware of. |
 |                       | .max-Tasks       | 10                    | Maximum amount of tasks that will be fetched with each request. |
 |                       | .use-priority    | true                  | Specifies whether tasks should be fetched based on their priority or arbitrarily. |
@@ -158,7 +162,7 @@ You may use the following properties (typically in application.yml) to configure
 
 # 🏆Advanced Topics
 
-## Customize the external task client
+## Customize the External Task Client
 With the following bean it is possible to customize the external task client:
 ```java
 import info.novatec.micronaut.camunda.external.client.feature.ExternalClientCustomizer;

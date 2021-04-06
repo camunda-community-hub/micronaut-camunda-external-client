@@ -115,7 +115,7 @@ public class ExternalWorkerSubscriptionCreator {
         builder.open();
 
         //noinspection OptionalGetWithoutIsPresent
-        log.info("External task client subscribed to topic {}", annotationValue.stringValue("topicName").get());
+        log.info("External task client subscribed to topic '{}'", annotationValue.stringValue("topicName").get());
 
     }
 }

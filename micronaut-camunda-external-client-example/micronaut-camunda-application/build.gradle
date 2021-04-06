@@ -10,7 +10,7 @@ micronaut {
     testRuntime("junit5")
     processing {
         incremental(true)
-        annotations("info.novatec.micronaut.camunda.bpm.application.*")
+        annotations("info.novatec.micronaut.camunda.application.*")
     }
 }
 
@@ -26,7 +26,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("info.novatec.micronaut.camunda.bpm.application.Application")
+    mainClass.set("info.novatec.micronaut.camunda.application.Application")
 }
 java {
     sourceCompatibility = JavaVersion.toVersion("1.8")

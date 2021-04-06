@@ -40,6 +40,6 @@ public class SimpleHandler implements ExternalTaskHandler {
     public void execute(ExternalTask externalTask, ExternalTaskService externalTaskService) {
 
         externalTaskService.complete(externalTask);
-        log.info("Finished do nothing external task");
+        log.info("Completed external task");
     }
 }

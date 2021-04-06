@@ -17,7 +17,7 @@ package info.novatec.micronaut.camunda.external.client.feature.test
 
 import info.novatec.micronaut.camunda.external.client.feature.ExternalTaskClientStartupTime
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
-import org.junit.jupiter.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.util.*
 import javax.inject.Inject
@@ -33,6 +33,6 @@ class ExternalTaskClientStartupTimeTest {
 
     @Test
     fun `test startup time`() {
-        Assertions.assertEquals(true, startupTime.isPresent)
+        assertThat(startupTime).isPresent
     }
 }
