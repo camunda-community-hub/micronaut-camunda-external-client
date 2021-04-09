@@ -28,7 +28,7 @@ import java.util.Optional;
 public interface Configuration {
 
     /**
-     * Base url of the Camunda Platform REST API. This information is mandatory.
+     * Mandatory base url of the Camunda Platform REST API.
      *
      * @return the base url
      */
