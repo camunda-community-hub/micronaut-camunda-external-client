@@ -6,7 +6,7 @@ Micronaut is known for its efficient use of resources. With this integration you
 
 The integration is preconfigured with sensible defaults, so that you can get started with minimal configuration: simply add a dependency in your Micronaut project!
 
-If you also want to run the Camunda Workflow Engine on Micronaut then have a look at the open source project [micronaut-camunda-bpm](https://github.com/NovatecConsulting/micronaut-camunda-bpm).
+If you also want to run the Camunda Workflow Engine on Micronaut, have a look at the open source project [micronaut-camunda-bpm](https://github.com/NovatecConsulting/micronaut-camunda-bpm).
 
 ---
 _We're not aware of all installations of our Open Source project. However, we love_
@@ -104,7 +104,7 @@ client will automatically connect to the specified Camunda REST API and start fe
 Example configuration in application.yml
 ```yaml
 camunda.external-client:
-  base-url: the URL of your Camunda REST API
+  base-url: http://localhost:8080/engine-rest
 ```
 Example handler:
 ```java 
@@ -116,7 +116,7 @@ import org.camunda.bpm.client.task.ExternalTaskService;
 import javax.inject.Singleton;
 
 @Singleton
-@ExternalTaskSubscription(topicName = "your topic name")
+@ExternalTaskSubscription(topicName = "my-topic")
 public class ExampleHandler implements ExternalTaskHandler {
 
     @Override
@@ -168,13 +168,16 @@ You may use the following properties (typically in application.yml) to configure
 # 🏆Advanced Topics
 
 ## Customize the External Task Client
-With the following bean it is possible to customize the external task client:
+
+With the following bean it is possible to customize the external task client, e.g. to implement custom backoff strategies or register a client request interceptor.
+
 ```java
 import info.novatec.micronaut.camunda.external.client.feature.ExternalClientCustomizer;
 import io.micronaut.context.annotation.Replaces;
 import org.camunda.bpm.client.ExternalTaskClientBuilder;
-
 import javax.inject.Singleton;
+import org.camunda.bpm.client.backoff.BackoffStrategy;
+import org.camunda.bpm.client.interceptor.ClientRequestInterceptor;
 
 @Singleton
 @Replaces(ExternalClientCustomizer.class)
@@ -183,12 +186,16 @@ public class MyExternalClientCustomizer implements ExternalClientCustomizer {
     @Override
     public void customize(ExternalTaskClientBuilder builder) {
         // Do your customization here e.g.:
-        builder.asyncResponseTimeout(1000);
+        BackoffStrategy backoffStrategy = ...;
+        ClientRequestInterceptor interceptor = ...;
+ 
+        builder.backoffStrategy(backoffStrategy)
+          .addInterceptor(interceptor);
     }
 }
 ```
-You can use this e.g. to implement custom backoff strategies. Important: the properties set within your customizer have 
-higher priority than the properties set in your configuration file.
+
+Important: the values set within your customizer have higher priority than the properties set in your configuration file.
 
 ## GraalVM
 
@@ -247,7 +254,14 @@ You can then start the external client (Note: Server must be running):
 
 `build/native-image/application`
 
-The application will be up and processing the first tasks in about 35ms:
+The application will be up and processing the first tasks in about 35ms (!):
+
+```
+INFO  io.micronaut.runtime.Micronaut - Startup completed in 33ms. Server Running: http://localhost:8888
+INFO  i.n.m.c.e.c.example.SimpleHandler - Completed external task
+INFO  i.n.m.c.e.c.example.SimpleHandler - Completed external task
+INFO  i.n.m.c.e.c.example.SimpleHandler - Completed external task
+```
 
 # 📚Releases
 
@@ -256,7 +270,7 @@ The list of [releases](https://github.com/NovatecConsulting/micronaut-camunda-ex
 We use [Semantic Versioning](https://semver.org/) which does allow incompatible changes before release 1.0.0, but we try to minimize them.
 
 The following compatibility matrix shows the officially supported Micronaut and Camunda versions for each release.
-Other combinations might also work but have not been tested. It will probably work with Camunda 7.9.0 and newer.
+Other combinations might also work but have not been tested. The current release of the external client will probably work with a server running on Camunda 7.9.0 and newer.
 
 | Release |Micronaut | Camunda |
 |--------|-------|--------|
