@@ -38,6 +38,8 @@ Micronaut + Camunda = :heart:
 * 🚀 [Getting Started](#getting-started)
   * [Supported JDKs](#supported-jdks)
   * [Dependency Management](#dependency-management)
+  * [Creating a Client](#creating-a-client)
+  * [ExternalTaskSubscription Annotation](#externaltasksubscription-annotation)
   * [Configuration](#configuration)
 * 🏆 [Advanced Topics](#advanced-topics)
   * [Customize the External Task Client](#customize-the-external-task-client)
@@ -75,7 +77,7 @@ The Camunda integration works with both Gradle and Maven, but we recommend using
 1. Optional: Create an empty Micronaut project using [Micronaut Launch](https://micronaut.io/launch) or alternatively with the CLI: `mn create-app my-example`.
 2. Add the dependency to the build.gradle:
 ```groovy
-implementation("info.novatec:micronaut-camunda-external-client-feature:0.1.0")
+implementation("info.novatec:micronaut-camunda-external-client-feature:0.2.0")
 ```
 </details>
 
@@ -88,14 +90,14 @@ implementation("info.novatec:micronaut-camunda-external-client-feature:0.1.0")
 <dependency>
   <groupId>info.novatec</groupId>
   <artifactId>micronaut-camunda-external-client-feature</artifactId>
-  <version>0.1.0</version>
+  <version>0.2.0</version>
 </dependency>
 ```
 </details>
 
 Note: The module `micronaut-camunda-external-client-feature` includes the dependency `org.camunda.bpm:camunda-external-task-client` which will be resolved transitively.
 
-## Creating a client
+## Creating a Client
 The minimal configuration requires you to provide a handler for a specific topic and a configuration that points to the
 Camunda REST API. You can register multiple handlers in this way for different topics. To register a handler you just 
 need to add the annotation `ExternalTaskSubscription` and specify the topic to listen to. On start of the application the external task 
@@ -274,13 +276,14 @@ Other combinations might also work but have not been tested. The current release
 
 | Release |Micronaut | Camunda |
 |--------|-------|--------|
-| 0.1.0 | 2.4.2 | 7.14.0 |
+| 0.2.0  | 2.4.2 | 7.15.0 |
 
 <details>
 <summary>Click to see older releases</summary>
 
 | Release |Micronaut | Camunda |
 |--------|-------|--------|
+| 0.1.0  | 2.4.2 | 7.14.0 |
 </details>
 
 Download of Releases:
