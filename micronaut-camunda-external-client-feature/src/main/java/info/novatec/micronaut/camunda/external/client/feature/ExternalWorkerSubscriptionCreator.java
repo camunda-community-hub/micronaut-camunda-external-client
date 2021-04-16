@@ -36,14 +36,11 @@ public class ExternalWorkerSubscriptionCreator {
 
     private static final Logger log = LoggerFactory.getLogger(ExternalWorkerSubscriptionCreator.class);
 
-    protected final Configuration configuration;
     protected final BeanContext beanContext;
     protected final ExternalTaskClient externalTaskClient;
 
-    public ExternalWorkerSubscriptionCreator(Configuration configuration,
-                                             BeanContext beanContext,
+    public ExternalWorkerSubscriptionCreator(BeanContext beanContext,
                                              ExternalTaskClient externalTaskClient) {
-        this.configuration = configuration;
         this.beanContext = beanContext;
         this.externalTaskClient = externalTaskClient;
 
@@ -68,7 +65,7 @@ public class ExternalWorkerSubscriptionCreator {
 
         builder.handler(externalTaskHandler);
 
-        annotationValue.longValue("lockDuration").ifPresent(it -> builder.lockDuration(it));
+        annotationValue.longValue("lockDuration").ifPresent(builder::lockDuration);
 
         annotationValue.get("variables", String[].class).ifPresent(it -> {
             if(!it[0].equals("")){
@@ -76,11 +73,11 @@ public class ExternalWorkerSubscriptionCreator {
             }
         });
 
-        annotationValue.booleanValue("localVariables").ifPresent(it -> builder.localVariables(it));
+        annotationValue.booleanValue("localVariables").ifPresent(builder::localVariables);
 
-        annotationValue.stringValue("businessKey").ifPresent(it -> builder.businessKey(it));
+        annotationValue.stringValue("businessKey").ifPresent(builder::businessKey);
 
-        annotationValue.stringValue("processDefinitionId").ifPresent(it -> builder.processDefinitionId(it));
+        annotationValue.stringValue("processDefinitionId").ifPresent(builder::processDefinitionId);
 
         annotationValue.get("processDefinitionIdIn", String[].class).ifPresent(it -> {
             if(!it[0].equals("")){
@@ -88,7 +85,7 @@ public class ExternalWorkerSubscriptionCreator {
             }
         });
 
-        annotationValue.stringValue("processDefinitionKey").ifPresent(it -> builder.processDefinitionKey(it));
+        annotationValue.stringValue("processDefinitionKey").ifPresent(builder::processDefinitionKey);
 
         annotationValue.get("processDefinitionKeyIn", String[].class).ifPresent(it -> {
             if(!it[0].equals("")) {
@@ -96,7 +93,7 @@ public class ExternalWorkerSubscriptionCreator {
             }
         });
 
-        annotationValue.stringValue("processDefinitionVersionTag").ifPresent(it -> builder.processDefinitionVersionTag(it));
+        annotationValue.stringValue("processDefinitionVersionTag").ifPresent(builder::processDefinitionVersionTag);
 
         annotationValue.booleanValue("withoutTenantId").ifPresent(it -> {
             if (it) {
@@ -110,7 +107,7 @@ public class ExternalWorkerSubscriptionCreator {
             }
         });
 
-        annotationValue.booleanValue("includeExtensionProperties").ifPresent(it -> builder.includeExtensionProperties(it));
+        annotationValue.booleanValue("includeExtensionProperties").ifPresent(builder::includeExtensionProperties);
 
         builder.open();
 

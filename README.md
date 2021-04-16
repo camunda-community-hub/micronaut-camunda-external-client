@@ -2,7 +2,7 @@
 
 This open source project allows you to easily integrate [Camunda](https://camunda.com/products/bpmn-engine) 's [External Task Clients](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) into [Micronaut](https://micronaut.io) projects.
 
-Micronaut is known for its efficient use of resources. With this integration you can easily implement an external client which to process external tasks. If you use GraalVM you have startup times of about 20 to 30ms!
+Micronaut is known for its efficient use of resources. With this integration you can easily implement an external client which to process external tasks. If you use GraalVM you have startup times of about 35ms!
 
 The integration is preconfigured with sensible defaults, so that you can get started with minimal configuration: simply add a dependency in your Micronaut project!
 
@@ -57,8 +57,8 @@ Micronaut + Camunda = :heart:
 This section describes what needs to be done to use `micronaut-camunda-external-client-feature` in a Micronaut project.
 
 Here are some example applications:
-* [Calculation](https://github.com/tobiasschaefer/micronaut-camunda-external-client-example-java-gradle) where the server with a BPMN process creates calculations which will be solved by the external task client.
-* [Internal example application](/micronaut-camunda-external-client-example) used during development. Remember that you need to start the [Camunda Application](/micronaut-camunda-external-client-example/micronaut-camunda-application) first.
+* [Calculation](https://github.com/tobiasschaefer/micronaut-camunda-external-client-example-java-gradle) where the server with a BPMN process creates calculations which will be executed by the external task client.
+* [Internal example application](/micronaut-camunda-external-client-example) used during development. Remember that you need to start the [Camunda Process Application](/micronaut-camunda-server-example) first.
 
 ## Supported JDKs
 
@@ -124,7 +124,7 @@ public class ExampleHandler implements ExternalTaskHandler {
     @Override
     public void execute(ExternalTask externalTask, ExternalTaskService externalTaskService) {
         // Put your business logic here
-        
+    
         externalTaskService.complete(externalTask);
     }
 }
@@ -188,11 +188,11 @@ public class MyExternalClientCustomizer implements ExternalClientCustomizer {
     @Override
     public void customize(ExternalTaskClientBuilder builder) {
         // Do your customization here e.g.:
-        BackoffStrategy backoffStrategy = ...;
-        ClientRequestInterceptor interceptor = ...;
- 
+        BackoffStrategy backoffStrategy = ...
+        ClientRequestInterceptor interceptor = ...
+
         builder.backoffStrategy(backoffStrategy)
-          .addInterceptor(interceptor);
+                .addInterceptor(interceptor);
     }
 }
 ```

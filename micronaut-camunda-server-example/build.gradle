@@ -26,7 +26,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("info.novatec.micronaut.camunda.application.Application")
+    mainClass.set("info.novatec.micronaut.camunda.application.ServerApplication")
 }
 java {
     sourceCompatibility = JavaVersion.toVersion("1.8")
