@@ -30,7 +30,7 @@ import javax.inject.Singleton;
 @Factory
 public class ExternalTaskClientFactory {
 
-    private static Logger log = LoggerFactory.getLogger(ExternalTaskClientFactory.class);
+    private static final Logger log = LoggerFactory.getLogger(ExternalTaskClientFactory.class);
 
     @Singleton
     ExternalTaskClient buildClient(Configuration configuration, ExternalClientCustomizer externalClientCustomizer) {
@@ -38,13 +38,13 @@ public class ExternalTaskClientFactory {
         ExternalTaskClientBuilder clientBuilder = ExternalTaskClient.create();
 
         clientBuilder.baseUrl(configuration.getBaseUrl());
-        configuration.getWorkerId().ifPresent(it -> clientBuilder.workerId(it));
-        configuration.getMaxTasks().ifPresent(it -> clientBuilder.maxTasks(it));
-        configuration.getUsePriority().ifPresent(it -> clientBuilder.usePriority(it));
-        configuration.getDefaultSerializationFormat().ifPresent(it -> clientBuilder.defaultSerializationFormat(it));
-        configuration.getDateFormat().ifPresent(it -> clientBuilder.dateFormat(it));
-        configuration.getAsyncResponseTimeout().ifPresent(it -> clientBuilder.asyncResponseTimeout(it));
-        configuration.getLockDuration().ifPresent(it -> clientBuilder.lockDuration(it));
+        configuration.getWorkerId().ifPresent(clientBuilder::workerId);
+        configuration.getMaxTasks().ifPresent(clientBuilder::maxTasks);
+        configuration.getUsePriority().ifPresent(clientBuilder::usePriority);
+        configuration.getDefaultSerializationFormat().ifPresent(clientBuilder::defaultSerializationFormat);
+        configuration.getDateFormat().ifPresent(clientBuilder::dateFormat);
+        configuration.getAsyncResponseTimeout().ifPresent(clientBuilder::asyncResponseTimeout);
+        configuration.getLockDuration().ifPresent(clientBuilder::lockDuration);
         configuration.getDisableAutoFetching().ifPresent(it -> {
             if(it) {
                 clientBuilder.disableAutoFetching();

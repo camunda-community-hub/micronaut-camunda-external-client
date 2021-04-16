@@ -19,6 +19,7 @@ import info.novatec.micronaut.camunda.external.client.feature.ExternalTaskSubscr
 import org.camunda.bpm.client.task.ExternalTask;
 import org.camunda.bpm.client.task.ExternalTaskHandler;
 import org.camunda.bpm.client.task.ExternalTaskService;
+import org.camunda.bpm.engine.variable.Variables;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +32,7 @@ import javax.inject.Singleton;
  * topics.
  */
 @Singleton
-@ExternalTaskSubscription(topicName = "test-topic")
+@ExternalTaskSubscription(topicName = "number-topic")
 public class SimpleHandler implements ExternalTaskHandler {
 
     private static final Logger log = LoggerFactory.getLogger(SimpleHandler.class);
@@ -39,7 +40,10 @@ public class SimpleHandler implements ExternalTaskHandler {
     @Override
     public void execute(ExternalTask externalTask, ExternalTaskService externalTaskService) {
 
-        externalTaskService.complete(externalTask);
-        log.info("Completed external task");
+        int number = externalTask.getVariable("number");
+        int result = number * 2;
+
+        log.info("Completed external task: {}*2={}", number, result);
+        externalTaskService.complete(externalTask, Variables.putValue("result", result));
     }
 }
