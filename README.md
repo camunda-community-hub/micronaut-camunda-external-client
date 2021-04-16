@@ -58,7 +58,7 @@ This section describes what needs to be done to use `micronaut-camunda-external-
 
 Here are some example applications:
 * [Calculation](https://github.com/tobiasschaefer/micronaut-camunda-external-client-example-java-gradle) where the server with a BPMN process creates calculations which will be solved by the external task client.
-* [Internal example application](/micronaut-camunda-external-client-example) used during development. Remember that you need to start the [Camunda Application](/micronaut-camunda-external-client-example/micronaut-camunda-bpm-application) first.
+* [Internal example application](/micronaut-camunda-external-client-example) used during development. Remember that you need to start the [Camunda Application](/micronaut-camunda-external-client-example/micronaut-camunda-application) first.
 
 ## Supported JDKs
 
