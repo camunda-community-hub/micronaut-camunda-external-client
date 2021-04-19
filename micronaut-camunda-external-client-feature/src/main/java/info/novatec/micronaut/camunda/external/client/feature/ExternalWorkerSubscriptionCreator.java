@@ -28,8 +28,8 @@ import org.slf4j.LoggerFactory;
 /**
  * @author Martin Sawilla
  *
- * Allows to configure an externa task worker with the ExternalTaskSubscription annotation. This allows to easily build
- * External workers for multiple topics.
+ * Allows to configure an external task worker with the {@link ExternalTaskSubscription} annotation. This allows to easily build
+ * external workers for multiple topics.
  */
 @Context
 public class ExternalWorkerSubscriptionCreator {
