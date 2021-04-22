@@ -25,6 +25,8 @@ import org.camunda.bpm.client.topic.TopicSubscriptionBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Map;
+
 /**
  * @author Martin Sawilla
  *
@@ -38,11 +40,15 @@ public class ExternalWorkerSubscriptionCreator {
 
     protected final BeanContext beanContext;
     protected final ExternalTaskClient externalTaskClient;
+    protected Configuration configuration;
 
     public ExternalWorkerSubscriptionCreator(BeanContext beanContext,
-                                             ExternalTaskClient externalTaskClient) {
+                                             ExternalTaskClient externalTaskClient,
+                                             Configuration configuration) {
         this.beanContext = beanContext;
         this.externalTaskClient = externalTaskClient;
+
+        this.configuration = configuration;
 
         beanContext.getBeanDefinitions(ExternalTaskHandler.class).forEach(this::registerExternalTaskHandler);
     }
@@ -52,23 +58,37 @@ public class ExternalWorkerSubscriptionCreator {
         AnnotationValue<ExternalTaskSubscription> annotationValue = beanDefinition.getAnnotation(ExternalTaskSubscription.class);
 
         if (annotationValue != null) {
-            buildTopicSubscription(externalTaskHandler, externalTaskClient, annotationValue);
+            //noinspection OptionalGetWithoutIsPresent
+            String topicName = annotationValue.stringValue("topicName").get();
+
+            TopicSubscriptionBuilder builder = createTopicSubscription(externalTaskHandler, externalTaskClient, topicName, annotationValue);
+
+            Map<String, Configuration.Subscription> subscriptions = configuration.getSubscriptions();
+            if (subscriptions != null && subscriptions.containsKey(topicName)) {
+                Configuration.Subscription subscription = subscriptions.get(topicName);
+                if (subscription != null) {
+                    overrideTopicSubscriptionWithConfigurationProperties(subscription, builder, topicName);
+                }
+            }
+
+            builder.open();
+            log.info("External task client subscribed to topic '{}'", topicName);
+
         } else {
-            log.warn("Skipping subscription. Could not find Annotation ExternalTaskSubscription on class {}", beanDefinition.getName());
+            log.warn("Skipping subscription. Could not find annotation ExternalTaskSubscription on class {}", beanDefinition.getName());
         }
     }
 
-    protected void buildTopicSubscription(ExternalTaskHandler externalTaskHandler, ExternalTaskClient client, AnnotationValue<ExternalTaskSubscription> annotationValue) {
+    protected TopicSubscriptionBuilder createTopicSubscription(ExternalTaskHandler externalTaskHandler, ExternalTaskClient client, String topicName, AnnotationValue<ExternalTaskSubscription> annotationValue) {
 
-        //noinspection OptionalGetWithoutIsPresent
-        TopicSubscriptionBuilder builder = client.subscribe(annotationValue.stringValue("topicName").get());
+        TopicSubscriptionBuilder builder = client.subscribe(topicName);
 
         builder.handler(externalTaskHandler);
 
         annotationValue.longValue("lockDuration").ifPresent(builder::lockDuration);
 
         annotationValue.get("variables", String[].class).ifPresent(it -> {
-            if(!it[0].equals("")){
+            if (!it[0].equals("")) {
                 builder.variables(it);
             }
         });
@@ -80,7 +100,7 @@ public class ExternalWorkerSubscriptionCreator {
         annotationValue.stringValue("processDefinitionId").ifPresent(builder::processDefinitionId);
 
         annotationValue.get("processDefinitionIdIn", String[].class).ifPresent(it -> {
-            if(!it[0].equals("")){
+            if (!it[0].equals("")) {
                 builder.processDefinitionIdIn(it);
             }
         });
@@ -88,7 +108,7 @@ public class ExternalWorkerSubscriptionCreator {
         annotationValue.stringValue("processDefinitionKey").ifPresent(builder::processDefinitionKey);
 
         annotationValue.get("processDefinitionKeyIn", String[].class).ifPresent(it -> {
-            if(!it[0].equals("")) {
+            if (!it[0].equals("")) {
                 builder.processDefinitionKeyIn(it);
             }
         });
@@ -102,17 +122,65 @@ public class ExternalWorkerSubscriptionCreator {
         });
 
         annotationValue.get("tenantIdIn", String[].class).ifPresent(it -> {
-            if(!it[0].equals("")) {
+            if (!it[0].equals("")) {
                 builder.tenantIdIn(it);
             }
         });
 
         annotationValue.booleanValue("includeExtensionProperties").ifPresent(builder::includeExtensionProperties);
 
-        builder.open();
+        return builder;
+    }
 
-        //noinspection OptionalGetWithoutIsPresent
-        log.info("External task client subscribed to topic '{}'", annotationValue.stringValue("topicName").get());
+    protected void overrideTopicSubscriptionWithConfigurationProperties(Configuration.Subscription subscription, TopicSubscriptionBuilder builder, String topicName) {
+        log.info("External configuration for topic {} found.", topicName);
 
+        if (subscription.getLockDuration() != null) {
+            builder.lockDuration(subscription.getLockDuration());
+        }
+
+        if (subscription.getVariables() != null) {
+            builder.variables(subscription.getVariables());
+        }
+
+        if (subscription.getLocalVariables() != null) {
+            builder.localVariables(subscription.getLocalVariables());
+        }
+
+        if (subscription.getBusinessKey() != null) {
+            builder.businessKey((subscription.getBusinessKey()));
+        }
+
+        if (subscription.getProcessDefinitionId() != null) {
+            builder.processDefinitionId(subscription.getProcessDefinitionId());
+        }
+
+        if (subscription.getProcessDefinitionIdIn() != null) {
+            builder.processDefinitionIdIn(subscription.getProcessDefinitionIdIn());
+        }
+
+        if (subscription.getProcessDefinitionKey() != null) {
+            builder.processDefinitionKey(subscription.getProcessDefinitionKey());
+        }
+
+        if (subscription.getProcessDefinitionKeyIn() != null) {
+            builder.processDefinitionKeyIn(subscription.getProcessDefinitionKeyIn());
+        }
+
+        if (subscription.getProcessDefinitionVersionTag() != null) {
+            builder.processDefinitionVersionTag(subscription.getProcessDefinitionVersionTag());
+        }
+
+        if (subscription.getWithoutTenantId() != null && subscription.getWithoutTenantId()) {
+            builder.withoutTenantId();
+        }
+
+        if (subscription.getTenantIdIn() != null) {
+            builder.tenantIdIn(subscription.getTenantIdIn());
+        }
+
+        if (subscription.getIncludeExtensionProperties() != null) {
+            builder.includeExtensionProperties(subscription.getIncludeExtensionProperties());
+        }
     }
 }
