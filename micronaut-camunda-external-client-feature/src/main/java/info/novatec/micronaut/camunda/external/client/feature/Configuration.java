@@ -18,6 +18,7 @@ package info.novatec.micronaut.camunda.external.client.feature;
 import io.micronaut.context.annotation.ConfigurationProperties;
 import io.micronaut.context.annotation.Context;
 
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -112,4 +113,76 @@ public interface Configuration {
      * @return if the backoff strategy should be disabled
      */
     Optional<Boolean> getDisableBackoffStrategy();
+
+    /**
+     * A map containing configuration properties for handlers. The values defined in the annotation get overwritten.
+     *
+     * @return a map of configurations for the registered handlers.
+     */
+    Map<String, Subscription> getSubscriptions();
+
+    class Subscription {
+
+        private Long lockDuration;
+        private String[] variables;
+        private Boolean localVariables;
+        private String businessKey;
+        private String processDefinitionId;
+        private String[] processDefinitionIdIn;
+        private String processDefinitionKey;
+        private String[] processDefinitionKeyIn;
+        private String processDefinitionVersionTag;
+        private Boolean withoutTenantId;
+        private String[] tenantIdIn;
+        private Boolean includeExtensionProperties;
+
+        public Long getLockDuration() {
+            return lockDuration;
+        }
+
+        public String[] getVariables() {
+            return variables;
+        }
+
+        public Boolean getLocalVariables() {
+            return localVariables;
+        }
+
+        public String getBusinessKey() {
+            return businessKey;
+        }
+
+        public String getProcessDefinitionId() {
+            return processDefinitionId;
+        }
+
+        public String[] getProcessDefinitionIdIn() {
+            return processDefinitionIdIn;
+        }
+
+        public String getProcessDefinitionKey() {
+            return processDefinitionKey;
+        }
+
+        public String[] getProcessDefinitionKeyIn() {
+            return processDefinitionKeyIn;
+        }
+
+        public String getProcessDefinitionVersionTag() {
+            return processDefinitionVersionTag;
+        }
+
+        public Boolean getWithoutTenantId() {
+            return withoutTenantId;
+        }
+
+        public String[] getTenantIdIn() {
+            return tenantIdIn;
+        }
+
+        public Boolean getIncludeExtensionProperties() {
+            return includeExtensionProperties;
+        }
+    }
+
 }
