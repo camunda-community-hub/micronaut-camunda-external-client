@@ -45,6 +45,7 @@ Micronaut + Camunda = :heart:
   * [Customize the External Task Client](#customize-the-external-task-client)
   * [GraalVM](#graalvm)
 * 📚 [Releases](#releases)
+* 📆 [Publications](#publications)
 * 📨 [Contact](#contact)
 
 # ✨Features
@@ -289,6 +290,11 @@ Other combinations might also work but have not been tested. The current release
 Download of Releases:
 * [GitHub Artifacts](https://github.com/NovatecConsulting/micronaut-camunda-external-client/releases)
 * [Maven Central Artifacts](https://search.maven.org/artifact/info.novatec/micronaut-camunda-external-client-feature)
+
+# 📆Publications
+
+* 2021-04: The Camunda External Client for Micronaut  
+  [Blogpost](https://www.novatec-gmbh.de/en/blog/the-camunda-external-client-for-micronaut/) by Tobias Schäfer and Martin Sawilla
 
 # 📨Contact
 
