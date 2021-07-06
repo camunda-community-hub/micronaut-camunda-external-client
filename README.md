@@ -24,10 +24,10 @@ Do you want to contribute to our open source project? Please read the [Contribut
 
 Micronaut + Camunda = :heart:
 
-[![Release](https://img.shields.io/github/v/release/NovatecConsulting/micronaut-camunda-external-client.svg)](https://github.com/NovatecConsulting/micronaut-camunda-external-client/releases)
+[![Release](https://img.shields.io/github/v/release/camunda-community-hub/micronaut-camunda-external-client.svg)](https://github.com/camunda-community-hub/micronaut-camunda-external-client/releases)
 [![License](https://img.shields.io/:license-apache-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
-[![Continuous Integration](https://github.com/NovatecConsulting/micronaut-camunda-external-client/workflows/Continuous%20Integration/badge.svg)](https://github.com/NovatecConsulting/micronaut-camunda-external-client/actions)
-[![GitHub Discussions](https://img.shields.io/badge/Forum-GitHub_Discussions-blue)](https://github.com/NovatecConsulting/micronaut-camunda-external-client/discussions)
+[![Continuous Integration](https://github.com/camunda-community-hub/micronaut-camunda-external-client/workflows/Continuous%20Integration/badge.svg)](https://github.com/camunda-community-hub/micronaut-camunda-external-client/actions)
+[![GitHub Discussions](https://img.shields.io/badge/Forum-GitHub_Discussions-blue)](https://github.com/camunda-community-hub/micronaut-camunda-external-client/discussions)
 
 [![](https://img.shields.io/badge/Community%20Extension-An%20open%20source%20community%20maintained%20project-FF4700)](https://github.com/camunda-community-hub/community)
 [![](https://img.shields.io/badge/Lifecycle-Incubating-blue)](https://github.com/Camunda-Community-Hub/community/blob/main/extension-lifecycle.md#incubating-)
@@ -290,7 +290,7 @@ INFO  i.n.m.c.e.c.example.SimpleHandler - Completed external task
 
 # 📚Releases
 
-The list of [releases](https://github.com/NovatecConsulting/micronaut-camunda-external-client/releases) contains a detailed changelog.
+The list of [releases](https://github.com/camunda-community-hub/micronaut-camunda-external-client/releases) contains a detailed changelog.
 
 We use [Semantic Versioning](https://semver.org/) which does allow incompatible changes before release 1.0.0, but we try to minimize them.
 
@@ -312,7 +312,7 @@ Other combinations might also work but have not been tested. The current release
 </details>
 
 Download of Releases:
-* [GitHub Artifacts](https://github.com/NovatecConsulting/micronaut-camunda-external-client/releases)
+* [GitHub Artifacts](https://github.com/camunda-community-hub/micronaut-camunda-external-client/releases)
 * [Maven Central Artifacts](https://search.maven.org/artifact/info.novatec/micronaut-camunda-external-client-feature)
 
 # 📆Publications
@@ -324,10 +324,10 @@ Download of Releases:
 
 This open source project is being developed by [Novatec Consulting GmbH](https://www.novatec-gmbh.de/en/) with the support of the open source community.
 
-If you have any questions or ideas feel free to create an [issue](https://github.com/NovatecConsulting/micronaut-camunda-external-client/issues) or contact us via GitHub Discussions or mail.
+If you have any questions or ideas feel free to create an [issue](https://github.com/camunda-community-hub/micronaut-camunda-external-client/issues) or contact us via GitHub Discussions or mail.
 
 We love listening to your feedback, and of course also discussing the project roadmap and possible use cases with you!
 
 You can reach us:
-* [GitHub Discussions](https://github.com/NovatecConsulting/micronaut-camunda-external-client/discussions)
+* [GitHub Discussions](https://github.com/camunda-community-hub/micronaut-camunda-external-client/discussions)
 * [mailto:micronaut-camunda@novatec-gmbh.de](mailto:micronaut-camunda@novatec-gmbh.de)
