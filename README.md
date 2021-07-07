@@ -6,7 +6,7 @@ Micronaut is known for its efficient use of resources. With this integration you
 
 The integration is preconfigured with sensible defaults, so that you can get started with minimal configuration: simply add a dependency in your Micronaut project!
 
-If you also want to run the Camunda Workflow Engine on Micronaut, have a look at the open source project [micronaut-camunda-bpm](https://github.com/NovatecConsulting/micronaut-camunda-bpm).
+If you also want to run the Camunda Workflow Engine on Micronaut, have a look at the open source project [micronaut-camunda-bpm](https://github.com/camunda-community-hub/micronaut-camunda-bpm).
 
 ---
 _We're not aware of all installations of our Open Source project. However, we love_
