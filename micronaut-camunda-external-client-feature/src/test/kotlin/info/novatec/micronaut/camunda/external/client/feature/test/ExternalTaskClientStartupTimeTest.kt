@@ -17,10 +17,10 @@ package info.novatec.micronaut.camunda.external.client.feature.test
 
 import info.novatec.micronaut.camunda.external.client.feature.ExternalTaskClientStartupTime
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
+import jakarta.inject.Inject
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.util.*
-import javax.inject.Inject
 
 /**
  * @author Martin Sawilla

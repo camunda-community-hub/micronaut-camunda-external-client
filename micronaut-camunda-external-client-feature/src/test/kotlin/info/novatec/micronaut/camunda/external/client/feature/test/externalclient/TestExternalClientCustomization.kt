@@ -17,8 +17,8 @@ package info.novatec.micronaut.camunda.external.client.feature.test.externalclie
 
 import info.novatec.micronaut.camunda.external.client.feature.ExternalClientCustomizer
 import io.micronaut.context.annotation.Replaces
+import jakarta.inject.Singleton
 import org.camunda.bpm.client.ExternalTaskClientBuilder
-import javax.inject.Singleton
 
 /**
  * @author Martin Sawilla

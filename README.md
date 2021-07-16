@@ -113,11 +113,10 @@ camunda.external-client:
 Example handler:
 ```java 
 import info.novatec.micronaut.camunda.external.client.feature.ExternalTaskSubscription;
+import jakarta.inject.Inject;
 import org.camunda.bpm.client.task.ExternalTask;
 import org.camunda.bpm.client.task.ExternalTaskHandler;
 import org.camunda.bpm.client.task.ExternalTaskService;
-
-import javax.inject.Singleton;
 
 @Singleton
 @ExternalTaskSubscription(topicName = "my-topic")
@@ -200,8 +199,8 @@ With the following bean it is possible to customize the external task client, e.
 ```java
 import info.novatec.micronaut.camunda.external.client.feature.ExternalClientCustomizer;
 import io.micronaut.context.annotation.Replaces;
+import jakarta.inject.Inject;
 import org.camunda.bpm.client.ExternalTaskClientBuilder;
-import javax.inject.Singleton;
 import org.camunda.bpm.client.backoff.BackoffStrategy;
 import org.camunda.bpm.client.interceptor.ClientRequestInterceptor;
 

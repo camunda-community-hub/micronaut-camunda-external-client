@@ -16,13 +16,12 @@
 package info.novatec.micronaut.camunda.external.client.feature;
 
 import io.micronaut.context.annotation.Factory;
+import jakarta.inject.Singleton;
 import org.camunda.bpm.client.ExternalTaskClient;
 import org.camunda.bpm.client.ExternalTaskClientBuilder;
 import org.camunda.bpm.client.impl.ExternalTaskClientImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.inject.Singleton;
 
 /**
  * @author Martin Sawilla

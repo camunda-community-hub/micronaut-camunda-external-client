@@ -15,9 +15,8 @@
  */
 package info.novatec.micronaut.camunda.external.client.feature;
 
+import jakarta.inject.Singleton;
 import org.camunda.bpm.client.ExternalTaskClientBuilder;
-
-import javax.inject.Singleton;
 
 /**
  * @author Martin Sawilla
