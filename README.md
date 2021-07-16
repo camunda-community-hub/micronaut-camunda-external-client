@@ -78,7 +78,7 @@ The Camunda integration works with both Gradle and Maven, but we recommend using
 1. Optional: Create an empty Micronaut project using [Micronaut Launch](https://micronaut.io/launch) or alternatively with the CLI: `mn create-app my-example`.
 2. Add the dependency to the build.gradle:
 ```groovy
-implementation("info.novatec:micronaut-camunda-external-client-feature:0.4.0")
+implementation("info.novatec:micronaut-camunda-external-client-feature:1.0.0")
 ```
 </details>
 
@@ -91,7 +91,7 @@ implementation("info.novatec:micronaut-camunda-external-client-feature:0.4.0")
 <dependency>
   <groupId>info.novatec</groupId>
   <artifactId>micronaut-camunda-external-client-feature</artifactId>
-  <version>0.4.0</version>
+  <version>1.0.0</version>
 </dependency>
 ```
 </details>
@@ -299,13 +299,14 @@ Other combinations might also work but have not been tested. The current release
 
 | Release |Micronaut | Camunda |
 |--------|-------|--------|
-| 0.4.0  | 2.5.3 | 7.15.0 |
+| 1.0.0  | 2.5.9 | 7.15.0 |
 
 <details>
 <summary>Click to see older releases</summary>
 
 | Release |Micronaut | Camunda |
 |--------|-------|--------|
+| 0.4.0  | 2.5.3 | 7.15.0 |
 | 0.3.0  | 2.5.1 | 7.15.0 |
 | 0.2.0  | 2.4.2 | 7.15.0 |
 | 0.1.0  | 2.4.2 | 7.14.0 |
