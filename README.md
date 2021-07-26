@@ -70,31 +70,32 @@ We officially support the following JDKs:
 
 ## Dependency Management
 
-The Camunda integration works with both Gradle and Maven, but we recommend using Gradle because it has better Micronaut Support.
+The Camunda External Worker integration works with both Gradle and Maven, but we recommend using Gradle because it has better Micronaut Support.
 
-<details>
-<summary>Click to show Gradle configuration</summary>
+You have the following options to integrate the Camunda External Worker integration:
+* Create a new Micronaut project using [Micronaut Launch](https://micronaut.io/launch) and select the "camunda-external-worker" feature.
+* Manually add the dependency to a Micronaut project:
+  <details>
+  <summary>Click to show Gradle configuration</summary>
 
-1. Optional: Create an empty Micronaut project using [Micronaut Launch](https://micronaut.io/launch) or alternatively with the CLI: `mn create-app my-example`.
-2. Add the dependency to the build.gradle:
-```groovy
-implementation("info.novatec:micronaut-camunda-external-client-feature:1.0.0")
-```
-</details>
+  Add the dependency to the build.gradle file:
+  ```groovy
+  implementation("info.novatec:micronaut-camunda-external-client-feature:1.0.0")
+  ```
+  </details>
 
-<details>
-<summary>Click to show Maven configuration</summary>
+  <details>
+  <summary>Click to show Maven configuration</summary>
 
-1. Optional: Create an empty Micronaut using [Micronaut Launch](https://micronaut.io/launch) or alternatively with the CLI:  `mn create-app my-example --build=maven`.
-2. Add the dependency to the pom.xml:
-```xml
-<dependency>
-  <groupId>info.novatec</groupId>
-  <artifactId>micronaut-camunda-external-client-feature</artifactId>
-  <version>1.0.0</version>
-</dependency>
-```
-</details>
+  Add the dependency to the pom.xml file:
+  ```xml
+  <dependency>
+    <groupId>info.novatec</groupId>
+    <artifactId>micronaut-camunda-external-client-feature</artifactId>
+    <version>1.0.0</version>
+  </dependency>
+  ```
+  </details>
 
 Note: The module `micronaut-camunda-external-client-feature` includes the dependency `org.camunda.bpm:camunda-external-task-client` which will be resolved transitively.
 
