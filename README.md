@@ -319,8 +319,10 @@ Download of Releases:
 
 # 📆Publications
 
-* 2021-04: The Camunda External Client for Micronaut  
-  [Blogpost](https://www.novatec-gmbh.de/en/blog/the-camunda-external-client-for-micronaut/) by Tobias Schäfer and Martin Sawilla
+* 2021-07: [Automate any Process on Micronaut](https://camunda.com/blog/2021/07/automate-any-process-on-micronaut/)  
+  Blogpost by Tobias Schäfer
+* 2021-04: [The Camunda External Client for Micronaut](https://www.novatec-gmbh.de/en/blog/the-camunda-external-client-for-micronaut/)  
+  by Tobias Schäfer and Martin Sawilla
 
 # 📨Contact
 
