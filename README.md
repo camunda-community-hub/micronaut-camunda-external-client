@@ -80,7 +80,7 @@ You have the following options to integrate the Camunda External Worker integrat
 
   Add the dependency to the build.gradle file:
   ```groovy
-  implementation("info.novatec:micronaut-camunda-external-client-feature:1.0.0")
+  implementation("info.novatec:micronaut-camunda-external-client-feature:1.0.1")
   ```
   </details>
 
@@ -92,7 +92,7 @@ You have the following options to integrate the Camunda External Worker integrat
   <dependency>
     <groupId>info.novatec</groupId>
     <artifactId>micronaut-camunda-external-client-feature</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
   </dependency>
   ```
   </details>
@@ -293,20 +293,21 @@ INFO  i.n.m.c.e.c.example.SimpleHandler - Completed external task
 
 The list of [releases](https://github.com/camunda-community-hub/micronaut-camunda-external-client/releases) contains a detailed changelog.
 
-We use [Semantic Versioning](https://semver.org/) which does allow incompatible changes before release 1.0.0, but we try to minimize them.
+We use [Semantic Versioning](https://semver.org/).
 
 The following compatibility matrix shows the officially supported Micronaut and Camunda versions for each release.
 Other combinations might also work but have not been tested. The current release of the external client will probably work with a server running on Camunda 7.9.0 and newer.
 
 | Release |Micronaut | Camunda |
-|--------|-------|--------|
-| 1.0.0  | 2.5.9 | 7.15.0 |
+|--------|--------|--------|
+| 1.0.1  | 2.5.12 | 7.15.0 |
 
 <details>
 <summary>Click to see older releases</summary>
 
 | Release |Micronaut | Camunda |
 |--------|-------|--------|
+| 1.0.0  | 2.5.9 | 7.15.0 |
 | 0.4.0  | 2.5.3 | 7.15.0 |
 | 0.3.0  | 2.5.1 | 7.15.0 |
 | 0.2.0  | 2.4.2 | 7.15.0 |
