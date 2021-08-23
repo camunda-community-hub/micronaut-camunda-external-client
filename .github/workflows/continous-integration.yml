@@ -38,4 +38,4 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       - name: Build with Gradle Wrapper
-        run: ./gradlew build --warning-mode=fail ${{ matrix.gradle_args }}
+        run: ./gradlew build --warning-mode=all ${{ matrix.gradle_args }}
