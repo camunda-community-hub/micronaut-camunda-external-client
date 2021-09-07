@@ -15,13 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include: #Support LTS releases 8 and 11 and the latest release supported by Micronaut.
-          - java: '8'
-            gradle_args: ''
-          - java: '11'
-            gradle_args: '-Dorg.gradle.jvmargs=--illegal-access=permit'
-          - java: '16'
-            gradle_args: '-Dorg.gradle.jvmargs=--illegal-access=permit'
+        java: ['8', '11', '17'] #Support LTS releases 8, 11, 17 and the latest release supported by Micronaut.
 
     steps:
       - name: Git Checkout
@@ -32,5 +26,8 @@ jobs:
           distribution: 'zulu'
           java-version: ${{ matrix.java }}
           cache: 'gradle'
+      - name: Set JVM options for JDK 11
+        if: ${{ matrix.java == '11' }}
+        run: GRADLE_ARGS='-Dorg.gradle.jvmargs=--illegal-access=permit'
       - name: Build with Gradle Wrapper
-        run: ./gradlew build --warning-mode=all ${{ matrix.gradle_args }}
+        run: ./gradlew build --warning-mode=all $GRADLE_ARGS
