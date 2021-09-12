@@ -73,7 +73,7 @@ We officially support the following JDKs:
 The Camunda External Worker integration works with both Gradle and Maven, but we recommend using Gradle because it has better Micronaut Support.
 
 You have the following options to integrate the Camunda External Worker integration:
-* Create a new Micronaut project using [Micronaut Launch](https://micronaut.io/launch) and select the "camunda-external-worker" feature.
+* Create a new Micronaut project using [Micronaut Launch](https://micronaut.io/launch?name=externalworker&features=camunda-external-worker) and check that the "camunda-external-worker" feature is selected.
 * Manually add the dependency to a Micronaut project:
   <details>
   <summary>Click to show Gradle configuration</summary>
