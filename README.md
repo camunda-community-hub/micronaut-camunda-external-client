@@ -328,8 +328,6 @@ Download of Releases:
 
 # 📨Contact
 
-This open source project is being developed by [Novatec Consulting GmbH](https://www.novatec-gmbh.de/en/) with the support of the open source community.
-
 If you have any questions or ideas feel free to create an [issue](https://github.com/camunda-community-hub/micronaut-camunda-external-client/issues) or contact us via GitHub Discussions or mail.
 
 We love listening to your feedback, and of course also discussing the project roadmap and possible use cases with you!
@@ -337,3 +335,7 @@ We love listening to your feedback, and of course also discussing the project ro
 You can reach us:
 * [GitHub Discussions](https://github.com/camunda-community-hub/micronaut-camunda-external-client/discussions)
 * [mailto:micronaut-camunda@novatec-gmbh.de](mailto:micronaut-camunda@novatec-gmbh.de)
+
+This open source project is being developed by [Novatec Consulting GmbH](https://www.novatec-gmbh.de/en/) with the support of the open source community.
+
+![Novatec Consulting GmbH](novatec.jpeg)
