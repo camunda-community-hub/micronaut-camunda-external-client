@@ -27,4 +27,4 @@ jobs:
           java-version: ${{ matrix.java }}
           cache: 'gradle'
       - name: Build with Gradle Wrapper
-        run: ./gradlew build --warning-mode=all
+        run: ./gradlew build --warning-mode=fail
