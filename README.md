@@ -230,13 +230,16 @@ The following instructions are based on macOS - other operating systems will pro
 
 ### Initial Setup
 
-Install the `gu` executable to be able to install `native-image` based on instructions: https://www.graalvm.org/docs/getting-started/macos/
+Install the `gu` executable to be able to install `native-image` based on instructions: https://www.graalvm.org/docs/getting-started/macos/ which links to https://github.com/graalvm/graalvm-ce-builds/releases
 
 ```
-tar -xvf graalvm-ce-java11-darwin-amd64-21.0.0.2.tar.gz
-sudo mv graalvm-ce-java11-21.0.0.2 /Library/Java/JavaVirtualMachines
+tar -xvf graalvm-ce-java17-darwin-amd64-21.3.0.tar.gz
+sudo mv graalvm-ce-java17-21.3.0 /Library/Java/JavaVirtualMachines
 /usr/libexec/java_home -V
+sudo xattr -r -d com.apple.quarantine /Library/Java/JavaVirtualMachines/graalvm-ce-java17-21.3.0
+export PATH=/Library/Java/JavaVirtualMachines/graalvm-ce-java17-21.3.0/Contents/Home/bin:$PATH
 gu install native-image
+native-image --version
 ```
 
 ### Install GraalVM
@@ -245,47 +248,66 @@ Install GraalVM using [SDKMAN!](https://sdkman.io/):
 
 ```
 curl -s "https://get.sdkman.io" | bash
-sdk install java 21.0.0.2.r11-grl
+sdk install java 21.3.0.r17-grl
 ```
 
 ### Initialize Environment
 
 ```
-sdk use java 21.0.0.2.r11-grl
-export PATH=/Library/Java/JavaVirtualMachines/graalvm-ce-java11-21.0.0.2/Contents/Home/bin:$PATH
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/graalvm-ce-java11-21.0.0.2/Contents/Home
+sdk use java 21.3.0.r17-grl
+export PATH=/Library/Java/JavaVirtualMachines/graalvm-ce-java17-21.3.0/Contents/Home/bin:$PATH
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/graalvm-ce-java17-21.3.0/Contents/Home
 ```
 
 ### Create Reflection Configuration
 
 ```
 cd micronaut-camunda-external-client-example
-../gradlew build
-mkdir -p src/main/resources/META-INF/native-image/info/novatec/micronaut/camunda/external/client/example
-java -agentlib:native-image-agent=config-output-dir=src/main/resources/META-INF/native-image/info/novatec/micronaut/camunda/external/client/example -jar build/libs/micronaut-camunda-external-client-example-0.0.1-SNAPSHOT-all.jar
+../gradlew clean build
+mkdir -p src/main/resources/META-INF/native-image
+java -agentlib:native-image-agent=config-output-dir=src/main/resources/META-INF/native-image -jar build/libs/micronaut-camunda-external-client-example-0.0.1-SNAPSHOT-all.jar
 ```
 
-and cancel the client with `Ctrl-C` once you see that the client is running when it repeatedly logs `Completed external task`.
+Start the server and cancel the client with `Ctrl-C` once you see that the client is running when it repeatedly logs `Completed external task`.
 
 ### Build Image
 
+The generated `reflect-config.json` misses three entries (why?) which we add manually:
+```
+{
+    "name":"org.camunda.bpm.client.variable.impl.format.json.JacksonJsonDataFormatProvider",
+    "queryAllPublicMethods":true,
+    "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+    "name":"org.camunda.bpm.client.variable.impl.format.serializable.SerializableDataFormatProvider",
+    "queryAllPublicMethods":true,
+    "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+    "name":"org.camunda.bpm.client.variable.impl.format.xml.DomXmlDataFormatProvider",
+    "queryAllPublicMethods":true,
+    "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+```
+
 Now build the native image - note: this will take a few minutes:
 
-`../gradlew clean nativeImage`
+`../gradlew clean nativeCompile`
 
 ### Start Native Client
 
 You can then start the external client (Note: Server must be running):
 
-`build/native-image/application`
+`build/native/nativeCompile/micronaut-camunda-external-client-example`
 
 The application will be up and processing the first tasks in about 35ms (!):
 
 ```
 INFO  io.micronaut.runtime.Micronaut - Startup completed in 33ms. Server Running: http://localhost:8888
-INFO  i.n.m.c.e.c.example.SimpleHandler - Completed external task
-INFO  i.n.m.c.e.c.example.SimpleHandler - Completed external task
-INFO  i.n.m.c.e.c.example.SimpleHandler - Completed external task
+INFO  i.n.m.c.e.c.example.SimpleHandler - Completed external task: 47*2=94
+INFO  i.n.m.c.e.c.example.SimpleHandler - Completed external task: 22*2=44
+INFO  i.n.m.c.e.c.example.SimpleHandler - Completed external task: 48*2=96
 ```
 
 # 📚Releases
