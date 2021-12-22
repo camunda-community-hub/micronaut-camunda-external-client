@@ -273,7 +273,7 @@ Start the server and cancel the client with `Ctrl-C` once you see that the clien
 ### Build Image
 
 The generated `reflect-config.json` misses three entries (why?) which we add manually:
-```
+```json
 {
     "name":"org.camunda.bpm.client.variable.impl.format.json.JacksonJsonDataFormatProvider",
     "queryAllPublicMethods":true,
