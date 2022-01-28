@@ -3,5 +3,9 @@ micronaut:
     name: micronaut-camunda-external-client-example
   server:
     port: 8888
+netty:
+  default:
+    allocator:
+      max-order: 3
 camunda.external-client:
   base-url: http://localhost:8080/engine-rest
