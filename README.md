@@ -1,12 +1,12 @@
 # micronaut-camunda-external-client
 
-This open source project allows you to easily integrate [Camunda](https://camunda.com/products/bpmn-engine) 's [External Task Clients](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) into [Micronaut](https://micronaut.io) projects.
+This open source project allows you to easily integrate [Camunda](https://camunda.com/products/bpmn-engine) 's [External Task Clients](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) into [Micronaut Framework](https://micronaut.io) projects.
 
-Micronaut is known for its efficient use of resources. With this integration you can easily implement an external client which to process external tasks. If you use GraalVM you have startup times of about 35ms!
+The Micronaut Framework is known for its efficient use of resources. With this integration you can easily implement an external client which to process external tasks. If you use GraalVM you have startup times of about 35ms!
 
 The integration is preconfigured with sensible defaults, so that you can get started with minimal configuration: simply add a dependency in your Micronaut project!
 
-If you also want to run the Camunda Workflow Engine on Micronaut, have a look at the open source project [micronaut-camunda-bpm](https://github.com/camunda-community-hub/micronaut-camunda-bpm).
+If you also want to run the Camunda Workflow Engine on a Micronaut application, have a look at the open source project [micronaut-camunda-bpm](https://github.com/camunda-community-hub/micronaut-camunda-bpm).
 
 ---
 _We're not aware of all installations of our Open Source project. However, we love_
@@ -22,7 +22,7 @@ Do you want to try it out? Please jump to the [Getting Started](#getting-started
 
 Do you want to contribute to our open source project? Please read the [Contribution Guidelines](CONTRIBUTING.md) and [contact us](#contact).
 
-Micronaut + Camunda = :heart:
+Micronaut Framework + Camunda = :heart:
 
 [![Release](https://img.shields.io/github/v/release/camunda-community-hub/micronaut-camunda-external-client.svg)](https://github.com/camunda-community-hub/micronaut-camunda-external-client/releases)
 [![License](https://img.shields.io/:license-apache-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
@@ -316,17 +316,17 @@ The list of [releases](https://github.com/camunda-community-hub/micronaut-camund
 
 We use [Semantic Versioning](https://semver.org/).
 
-The following compatibility matrix shows the officially supported Micronaut and Camunda versions for each release.
+The following compatibility matrix shows the officially supported Micronaut Framework and Camunda versions for each release.
 Other combinations might also work but have not been tested. The current release of the external client will probably work with a server running on Camunda 7.9.0 and newer.
 
-| Release |Micronaut | Camunda |
+| Release |Micronaut Framework | Camunda |
 |--------|--------|--------|
 | 2.3.0  | 3.3.0    | 7.16.0 |
 
 <details>
 <summary>Click to see older releases</summary>
 
-| Release |Micronaut | Camunda |
+| Release |Micronaut Framework | Camunda |
 |--------|-------|--------|
 | 2.2.0  | 3.2.0  | 7.16.0 |
 | 2.1.0  | 3.1.0  | 7.16.0 |
