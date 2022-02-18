@@ -36,11 +36,12 @@ Micronaut Framework + Camunda = :heart:
 
 * ✨ [Features](#features)
 * 🚀 [Getting Started](#getting-started)
-  * [Supported JDKs](#supported-jdks)
   * [Dependency Management](#dependency-management)
   * [Creating a Client](#creating-a-client)
   * [ExternalTaskSubscription Annotation](#externaltasksubscription-annotation)
   * [Configuration](#configuration)
+  * [Examples](#examples)
+  * [Supported JDKs](#supported-jdks)
 * 🏆 [Advanced Topics](#advanced-topics)
   * [Customize the External Task Client](#customize-the-external-task-client)
   * [GraalVM](#graalvm)
@@ -56,17 +57,6 @@ Micronaut Framework + Camunda = :heart:
 # 🚀Getting Started
 
 This section describes what needs to be done to use `micronaut-camunda-external-client-feature` in a Micronaut project.
-
-Here are some example applications:
-* [Calculation](https://github.com/tobiasschaefer/micronaut-camunda-external-client-example-java-gradle) where the server with a BPMN process creates calculations which will be executed by the external task client.
-* [Internal example application](/micronaut-camunda-external-client-example) used during development. Remember that you need to start the [Camunda Process Application](/micronaut-camunda-server-example) first.
-
-## Supported JDKs
-
-We officially support the following JDKs:
-* JDK 8 (LTS)
-* JDK 11 (LTS)
-* JDK 17 (LTS)
 
 ## Dependency Management
 
@@ -189,6 +179,19 @@ public class SimpleHandler implements ExternalTaskHandler {
     ...
 }
 ```
+
+## Examples
+
+Here are some example applications:
+* [Calculation](https://github.com/tobiasschaefer/micronaut-camunda-external-client-example-java-gradle) where the server with a BPMN process creates calculations which will be executed by the external task client.
+* [Internal example application](/micronaut-camunda-external-client-example) used during development. Remember that you need to start the [Camunda Process Application](/micronaut-camunda-server-example) first.
+
+## Supported JDKs
+
+We officially support the following JDKs:
+* JDK 8 (LTS)
+* JDK 11 (LTS)
+* JDK 17 (LTS)
 
 # 🏆Advanced Topics
 
