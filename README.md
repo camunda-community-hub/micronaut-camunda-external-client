@@ -348,6 +348,8 @@ Download of Releases:
 
 # 📆Publications
 
+* 2021-11: [Automating Processes with Camunda and Micronaut](https://www.youtube.com/watch?app=desktop&v=PwgrAb2z0YU&t=17m45s))  
+  Recording of the Novatec Summit by Tobias Schäfer (45 Minutes)
 * 2021-07: [Automate any Process on Micronaut](https://camunda.com/blog/2021/07/automate-any-process-on-micronaut/)  
   Blogpost by Tobias Schäfer
 * 2021-04: [The Camunda External Client for Micronaut](https://www.novatec-gmbh.de/en/blog/the-camunda-external-client-for-micronaut/)  
