@@ -21,13 +21,18 @@ import io.micronaut.core.annotation.Order;
 import io.micronaut.inject.BeanDefinition;
 import io.micronaut.runtime.event.annotation.EventListener;
 import io.micronaut.runtime.server.event.ServerStartupEvent;
+import jakarta.annotation.PreDestroy;
 import jakarta.inject.Singleton;
 import org.camunda.bpm.client.ExternalTaskClient;
 import org.camunda.bpm.client.task.ExternalTaskHandler;
+import org.camunda.bpm.client.topic.TopicSubscription;
 import org.camunda.bpm.client.topic.TopicSubscriptionBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -38,13 +43,15 @@ import java.util.Map;
  * external workers for multiple topics.
  */
 @Singleton
-public class ExternalWorkerSubscriptionCreator {
+public class ExternalWorkerSubscriptionCreator implements AutoCloseable {
 
     private static final Logger log = LoggerFactory.getLogger(ExternalWorkerSubscriptionCreator.class);
 
     protected final BeanContext beanContext;
     protected final ExternalTaskClient externalTaskClient;
     protected Configuration configuration;
+
+    protected Collection<TopicSubscription> topicSubscriptions = Collections.synchronizedCollection(new ArrayList<>());
 
     public ExternalWorkerSubscriptionCreator(BeanContext beanContext,
                                              ExternalTaskClient externalTaskClient,
@@ -53,6 +60,13 @@ public class ExternalWorkerSubscriptionCreator {
         this.externalTaskClient = externalTaskClient;
 
         this.configuration = configuration;
+    }
+
+    @PreDestroy
+    @Override
+    public void close() {
+        log.info("Closing {} topic subscriptions", topicSubscriptions.size());
+        topicSubscriptions.forEach(TopicSubscription::close);
     }
 
     @Order(-90) //Start after process engine with REST-interface which has order -100
@@ -79,7 +93,7 @@ public class ExternalWorkerSubscriptionCreator {
                 }
             }
 
-            builder.open();
+            topicSubscriptions.add(builder.open());
             log.info("External task client subscribed to topic '{}'", topicName);
 
         } else {
