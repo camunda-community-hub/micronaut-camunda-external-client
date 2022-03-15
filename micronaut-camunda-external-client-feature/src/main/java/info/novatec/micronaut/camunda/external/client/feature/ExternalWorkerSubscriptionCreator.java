@@ -16,9 +16,12 @@
 package info.novatec.micronaut.camunda.external.client.feature;
 
 import io.micronaut.context.BeanContext;
-import io.micronaut.context.annotation.Context;
 import io.micronaut.core.annotation.AnnotationValue;
+import io.micronaut.core.annotation.Order;
 import io.micronaut.inject.BeanDefinition;
+import io.micronaut.runtime.event.annotation.EventListener;
+import io.micronaut.runtime.server.event.ServerStartupEvent;
+import jakarta.inject.Singleton;
 import org.camunda.bpm.client.ExternalTaskClient;
 import org.camunda.bpm.client.task.ExternalTaskHandler;
 import org.camunda.bpm.client.topic.TopicSubscriptionBuilder;
@@ -29,11 +32,12 @@ import java.util.Map;
 
 /**
  * @author Martin Sawilla
+ * @author Tobias Schäfer
  *
  * Allows to configure an external task worker with the {@link ExternalTaskSubscription} annotation. This allows to easily build
  * external workers for multiple topics.
  */
-@Context
+@Singleton
 public class ExternalWorkerSubscriptionCreator {
 
     private static final Logger log = LoggerFactory.getLogger(ExternalWorkerSubscriptionCreator.class);
@@ -49,7 +53,11 @@ public class ExternalWorkerSubscriptionCreator {
         this.externalTaskClient = externalTaskClient;
 
         this.configuration = configuration;
+    }
 
+    @Order(-90) //Start after process engine with REST-interface which has order -100
+    @EventListener
+    public void onEvent(ServerStartupEvent event) {
         beanContext.getBeanDefinitions(ExternalTaskHandler.class).forEach(this::registerExternalTaskHandler);
     }
 
