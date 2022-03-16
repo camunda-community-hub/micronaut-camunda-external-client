@@ -94,7 +94,7 @@ public class ExternalWorkerSubscriptionCreator implements AutoCloseable {
             }
 
             topicSubscriptions.add(builder.open());
-            log.info("External task client subscribed to topic '{}'", topicName);
+            log.info("External task client '{}' subscribed to topic '{}'", externalTaskHandler.getClass().getSimpleName(), topicName);
 
         } else {
             log.warn("Skipping subscription. Could not find annotation ExternalTaskSubscription on class {}", beanDefinition.getName());
