@@ -15,7 +15,7 @@ micronaut {
 }
 
 dependencies {
-    implementation("info.novatec:micronaut-camunda-bpm-feature:2.14.0")
+    implementation("info.novatec:micronaut-camunda-bpm-feature:2.15.0")
     runtimeOnly("com.h2database:h2")
 
     implementation("io.micronaut:micronaut-http-client")
