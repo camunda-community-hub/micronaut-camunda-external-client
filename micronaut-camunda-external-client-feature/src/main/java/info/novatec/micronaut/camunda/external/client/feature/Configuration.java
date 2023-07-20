@@ -17,7 +17,10 @@ package info.novatec.micronaut.camunda.external.client.feature;
 
 import io.micronaut.context.annotation.ConfigurationProperties;
 import io.micronaut.context.annotation.Context;
+import io.micronaut.serde.annotation.Serdeable;
+import jakarta.annotation.Nullable;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -121,68 +124,17 @@ public interface Configuration {
      */
     Map<String, Subscription> getSubscriptions();
 
-    class Subscription {
-
-        private Long lockDuration;
-        private String[] variables;
-        private Boolean localVariables;
-        private String businessKey;
-        private String processDefinitionId;
-        private String[] processDefinitionIdIn;
-        private String processDefinitionKey;
-        private String[] processDefinitionKeyIn;
-        private String processDefinitionVersionTag;
-        private Boolean withoutTenantId;
-        private String[] tenantIdIn;
-        private Boolean includeExtensionProperties;
-
-        public Long getLockDuration() {
-            return lockDuration;
-        }
-
-        public String[] getVariables() {
-            return variables;
-        }
-
-        public Boolean getLocalVariables() {
-            return localVariables;
-        }
-
-        public String getBusinessKey() {
-            return businessKey;
-        }
-
-        public String getProcessDefinitionId() {
-            return processDefinitionId;
-        }
-
-        public String[] getProcessDefinitionIdIn() {
-            return processDefinitionIdIn;
-        }
-
-        public String getProcessDefinitionKey() {
-            return processDefinitionKey;
-        }
-
-        public String[] getProcessDefinitionKeyIn() {
-            return processDefinitionKeyIn;
-        }
-
-        public String getProcessDefinitionVersionTag() {
-            return processDefinitionVersionTag;
-        }
-
-        public Boolean getWithoutTenantId() {
-            return withoutTenantId;
-        }
-
-        public String[] getTenantIdIn() {
-            return tenantIdIn;
-        }
-
-        public Boolean getIncludeExtensionProperties() {
-            return includeExtensionProperties;
-        }
-    }
-
+    @Serdeable
+    record Subscription(@Nullable Long lockDuration,
+                        @Nullable List<String> variables,
+                        @Nullable Boolean localVariables,
+                        @Nullable String businessKey,
+                        @Nullable String processDefinitionId,
+                        @Nullable List<String> processDefinitionIdIn,
+                        @Nullable String processDefinitionKey,
+                        @Nullable List<String> processDefinitionKeyIn,
+                        @Nullable String processDefinitionVersionTag,
+                        @Nullable Boolean withoutTenantId,
+                        @Nullable List<String> tenantIdIn,
+                        @Nullable Boolean includeExtensionProperties) {}
 }

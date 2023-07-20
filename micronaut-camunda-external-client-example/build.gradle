@@ -19,6 +19,7 @@ dependencies {
 
     implementation("javax.annotation:javax.annotation-api")
     runtimeOnly("ch.qos.logback:logback-classic")
+    runtimeOnly("org.yaml:snakeyaml")
 }
 
 application {
@@ -26,8 +27,8 @@ application {
 }
 
 java {
-    sourceCompatibility = JavaVersion.toVersion("1.8")
-    targetCompatibility = JavaVersion.toVersion("1.8")
+    sourceCompatibility = JavaVersion.toVersion(javaLanguageVersion)
+    targetCompatibility = JavaVersion.toVersion(javaLanguageVersion)
 }
 
 graalvmNative {

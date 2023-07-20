@@ -15,6 +15,7 @@
  */
 package info.novatec.micronaut.camunda.external.client.feature.test
 
+import info.novatec.micronaut.camunda.external.client.feature.Configuration
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import jakarta.inject.Inject
 import org.assertj.core.api.Assertions.assertThat
@@ -32,13 +33,16 @@ class ExternalTaskSubscriptionConfigurationTest {
     @Inject
     lateinit var externalTaskClient: ExternalTaskClient
 
+    @Inject
+    lateinit var configuration: Configuration
+
     @Test
     fun `topic subscription with configuration`() {
         val topicName = "test-topic-configuration"
         val subscription = this.getSubscription(topicName)
 
         assertThat(subscription.topicName).isEqualTo(topicName)
-        assertThat(subscription.lockDuration).isEqualTo(30000)
+        assertThat(subscription.lockDuration).isEqualTo(configuration.subscriptions[topicName]?.lockDuration)
         assertThat(subscription.variableNames).containsExactly("var-one", "var-two")
         assertThat(subscription.isLocalVariables).isTrue
     }
