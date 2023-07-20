@@ -157,52 +157,52 @@ public class ExternalWorkerSubscriptionCreator implements AutoCloseable {
     protected void overrideTopicSubscriptionWithConfigurationProperties(Configuration.Subscription subscription, TopicSubscriptionBuilder builder, String topicName) {
         log.info("External configuration for topic {} found.", topicName);
 
-        if (subscription.getLockDuration() != null) {
-            builder.lockDuration(subscription.getLockDuration());
+        if (subscription.lockDuration() != null) {
+            builder.lockDuration(subscription.lockDuration());
         }
 
-        if (subscription.getVariables() != null) {
-            builder.variables(subscription.getVariables());
+        if (subscription.variables() != null) {
+            builder.variables(subscription.variables().toArray(String[]::new));
         }
 
-        if (subscription.getLocalVariables() != null) {
-            builder.localVariables(subscription.getLocalVariables());
+        if (subscription.localVariables() != null) {
+            builder.localVariables(subscription.localVariables());
         }
 
-        if (subscription.getBusinessKey() != null) {
-            builder.businessKey((subscription.getBusinessKey()));
+        if (subscription.businessKey() != null) {
+            builder.businessKey((subscription.businessKey()));
         }
 
-        if (subscription.getProcessDefinitionId() != null) {
-            builder.processDefinitionId(subscription.getProcessDefinitionId());
+        if (subscription.processDefinitionId() != null) {
+            builder.processDefinitionId(subscription.processDefinitionId());
         }
 
-        if (subscription.getProcessDefinitionIdIn() != null) {
-            builder.processDefinitionIdIn(subscription.getProcessDefinitionIdIn());
+        if (subscription.processDefinitionIdIn() != null) {
+            builder.processDefinitionIdIn(subscription.processDefinitionIdIn().toArray(String[]::new));
         }
 
-        if (subscription.getProcessDefinitionKey() != null) {
-            builder.processDefinitionKey(subscription.getProcessDefinitionKey());
+        if (subscription.processDefinitionKey() != null) {
+            builder.processDefinitionKey(subscription.processDefinitionKey());
         }
 
-        if (subscription.getProcessDefinitionKeyIn() != null) {
-            builder.processDefinitionKeyIn(subscription.getProcessDefinitionKeyIn());
+        if (subscription.processDefinitionKeyIn() != null) {
+            builder.processDefinitionKeyIn(subscription.processDefinitionKeyIn().toArray(String[]::new));
         }
 
-        if (subscription.getProcessDefinitionVersionTag() != null) {
-            builder.processDefinitionVersionTag(subscription.getProcessDefinitionVersionTag());
+        if (subscription.processDefinitionVersionTag() != null) {
+            builder.processDefinitionVersionTag(subscription.processDefinitionVersionTag());
         }
 
-        if (subscription.getWithoutTenantId() != null && subscription.getWithoutTenantId()) {
+        if (subscription.withoutTenantId() != null && subscription.withoutTenantId()) {
             builder.withoutTenantId();
         }
 
-        if (subscription.getTenantIdIn() != null) {
-            builder.tenantIdIn(subscription.getTenantIdIn());
+        if (subscription.tenantIdIn() != null) {
+            builder.tenantIdIn(subscription.tenantIdIn().toArray(String[]::new));
         }
 
-        if (subscription.getIncludeExtensionProperties() != null) {
-            builder.includeExtensionProperties(subscription.getIncludeExtensionProperties());
+        if (subscription.includeExtensionProperties() != null) {
+            builder.includeExtensionProperties(subscription.includeExtensionProperties());
         }
     }
 }
