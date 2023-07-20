@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: '8'
+          java-version: '17'
 
       - name: Extract secring.gpg to sign files
         run: echo -n $SECRING_GPG | base64 --decode > micronaut-camunda-external-client-feature/secring.gpg
