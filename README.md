@@ -72,7 +72,7 @@ You have the following options to integrate the Camunda External Worker integrat
 
   Add the dependency to the build.gradle file:
   ```groovy
-  implementation("info.novatec:micronaut-camunda-external-client-feature:3.4.0")
+  implementation("info.novatec:micronaut-camunda-external-client-feature:3.5.0")
   ```
   </details>
 
@@ -84,7 +84,7 @@ You have the following options to integrate the Camunda External Worker integrat
   <dependency>
     <groupId>info.novatec</groupId>
     <artifactId>micronaut-camunda-external-client-feature</artifactId>
-    <version>3.4.0</version>
+    <version>3.5.0</version>
   </dependency>
   ```
   </details>
@@ -329,13 +329,14 @@ Other combinations might also work but have not been tested. The current release
 
 | Release | Micronaut Framework | Camunda |
 |---------|---------------------|---------|
-| 3.4.0   | 4.0.1               | 7.23.0  |
+| 3.5.0   | 4.0.1               | 7.24.0  |
 
 <details>
 <summary>Click to see older releases</summary>
 
 | Release |Micronaut Framework | Camunda       |
 |--------|-------|---------------|
+| 3.4.0   | 4.0.1               | 7.23.0  |
 | 3.3.1   | 4.0.1               | 7.22.0  |
 | 3.2.0   | 4.0.1               | 7.21.0  |
 | 3.1.0   | 4.0.1               | 7.20.0  |
